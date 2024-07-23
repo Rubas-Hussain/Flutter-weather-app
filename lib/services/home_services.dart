@@ -10,13 +10,13 @@ class WeatherServices{
 
   WeatherServices({required this.apiKey});
 
-  Future<Weather>getWeather(String cityName)async{
+  Future<WeatherModel>getWeather(String cityName)async{
     final url = Uri.parse('$baseUrl?q=$cityName&appid=$apiKey&units=metric');
     final response=await http.get(url);
     var data=jsonDecode(response.body.toString());
 
     if(response.statusCode==200){
-      return Weather.fromJson(data);
+      return WeatherModel.fromJson(data);
     }else{
       throw Exception('Error');
     }
